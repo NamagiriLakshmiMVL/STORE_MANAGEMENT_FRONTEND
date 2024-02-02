@@ -21,7 +21,7 @@ const navigate = useNavigate()
         .catch((err)=>{
             alert("Invalid Credentials")
         })
-        console.log("Login Success")       
+          
         
     }
     return (
