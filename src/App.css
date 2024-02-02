@@ -1,0 +1,26 @@
+.login{
+  text-align: center;
+  margin-top: 10px;
+ 
+}
+.login-root{
+  margin-top: 30px;
+  
+}
+.home{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table{
+  width: 50%;
+}
+
+td{
+  width: 34.5%;
+  text-align: center;
+}
