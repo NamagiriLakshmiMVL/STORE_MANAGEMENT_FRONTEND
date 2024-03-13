@@ -1,28 +1,30 @@
 import { Box, Button } from "@mui/material";
-import React from "react";
+import React,{useState} from "react";
 import { useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/itemSlice";
-import {toast} from "react-toastify"
-
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 export function Wishlist(props) {
   const dispatch = useDispatch();
+  const [qty, setQty] = useState(1);
 
   const favorites = useSelector((state) => state.favoriteSlice.favItems);
-  console.log(favorites);
 
   const handleCart = (item) => {
-    toast.success("Dipatched",{
-      position:"top-center",
-      autoClose:1000
-    });
-    dispatch(addToCart(item));
+    const result = {
+      qty,
+      ...item,
+    };
+    dispatch(addToCart(result));
   };
   return (
     <Box>
-      <Typography variant="h5" sx={{fontWeight:"bold"}}>My Wishlist ({favorites.length})</Typography>
-      <Box sx={{ display: "flex", flexWrap: "wrap",gap:"50px" }}>
+      <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+        My Wishlist ({favorites.length})
+      </Typography>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: "50px" }}>
         {favorites.map((item) => {
           return (
             <Box
@@ -50,9 +52,20 @@ export function Wishlist(props) {
                 <Typography sx={{ marginTop: "10px" }} variant="h5">
                   Price {item.price}/Kg
                 </Typography>
+                <Box sx={{marginTop:"15px"}}>
+                <Button onClick={() => setQty(qty - 1)}>
+                  <RemoveIcon />
+                </Button>
+                {qty}
+                <Button onClick={() => setQty(qty + 1)}>
+                  <AddIcon />
+                </Button>
+                </Box>
                 <Button
-                  sx={{ marginTop: "20px" }}
+                  sx={{ marginTop: "20px",marginBottom:"10px" }}
                   onClick={() => handleCart(item)}
+                  variant="outlined"
+
                 >
                   Add to Cart
                 </Button>

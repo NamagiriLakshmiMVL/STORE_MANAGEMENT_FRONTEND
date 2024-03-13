@@ -33,6 +33,7 @@ function Cart() {
 
   const [subTotal, setSubTotal] = useState(0);
   const cartItems = useSelector((state) => state.itemShop.cartItems);
+ 
   useEffect(() => {
     let temp = 0;
     cartItems.forEach((item) => {
@@ -59,12 +60,9 @@ function Cart() {
     };
     localStorage.setItem("bill", reqObject.billId);
     await axios
-      .post("http://localhost:2000/bills/charge-bill", reqObject)
+      .post(`${API}/bills/charge-bill`, reqObject)
       .then((res) => {
-       (res.data === "Added SuccessFully")?(toast.success(res.data,{
-        position:"top-center",
-        autoClose:1000
-       }) &&  navigate("/bills")) : toast.error(res.data,{
+       (res.data === "Added SuccessFully")? navigate("/bills") : toast.error(res.data,{
         position:"top-center",
         autoClose:1000
        })

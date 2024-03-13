@@ -19,7 +19,7 @@ function Login() {
       password,
     };
     await axios
-      .post("http://localhost:2000/users/login", userDetails)
+      .post(`${API}/users/login`, userDetails)
       .then((res) => {
         res.data === "Login Success"
           ? toast.success(res.data, {

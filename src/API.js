@@ -1,1 +1,1 @@
-export const API = "https://store-management-7p68.onrender.com"
+export const API = "https://store-management-backend-1.onrender.com"

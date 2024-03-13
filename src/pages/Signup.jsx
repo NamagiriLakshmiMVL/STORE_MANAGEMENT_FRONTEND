@@ -23,7 +23,7 @@ function Signup() {
       mobile,
     };
     await axios
-      .post("http://localhost:2000/users/register", userDetails)
+      .post(`${API}/users/register`, userDetails)
       .then((res) => {
         res.data === "User Added Successfully"
           ? toast.success(res.data, {

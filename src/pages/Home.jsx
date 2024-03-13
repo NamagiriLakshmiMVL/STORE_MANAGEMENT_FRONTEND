@@ -21,7 +21,7 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .post("http://localhost:2000/items/get-items", result)
+        .post(`${API}/items/get-items`, result)
         .then((res) => setItemData(res.data));
     };
     fetchData();
