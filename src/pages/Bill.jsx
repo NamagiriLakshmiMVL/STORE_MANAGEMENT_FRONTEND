@@ -119,7 +119,9 @@ export function Bill() {
           ))}
         </Box>
 
-        <Button
+       
+      </Box>
+      <Button
           sx={{ marginLeft: "540px", marginTop: "20px" }}
           type="submit"
           onClick={handlePrint}
@@ -127,7 +129,6 @@ export function Bill() {
         >
           Print Bill
         </Button>
-      </Box>
     </Box>
   );
 }
