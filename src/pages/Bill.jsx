@@ -13,7 +13,7 @@ import { useReactToPrint } from "react-to-print";
 
 export function Bill() {
   const cartItems = useSelector((state) => state.itemShop.cartItems);
-
+  const token = localStorage.getItem("x-auth-token")
   const componentRef = React.useRef(null);
   const [billData, setBillData] = useState([]);
   const data = localStorage.getItem("bill");
@@ -21,7 +21,11 @@ export function Bill() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .post(`${API}/bills/get-bill`, res)
+        .post(`${API}/bills/get-bill`, res, {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
         .then((res) => setBillData(res.data));
     };
     fetchData();
@@ -30,7 +34,6 @@ export function Bill() {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  console.log(billData);
   return (
     <Box>
       <Typography

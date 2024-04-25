@@ -27,6 +27,7 @@ const style = {
 function Cart() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Cash");
+  const token = localStorage.getItem("x-auth-token")
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -60,7 +61,11 @@ function Cart() {
     };
     localStorage.setItem("bill", reqObject.billId);
     await axios
-      .post(`${API}/bills/charge-bill`, reqObject)
+      .post(`${API}/bills/charge-bill`, reqObject, {
+        headers: {
+          "x-auth-token": token,
+        },
+      })
       .then((res) => {
        (res.data === "Added SuccessFully")? navigate("/bills") : toast.error(res.data,{
         position:"top-center",

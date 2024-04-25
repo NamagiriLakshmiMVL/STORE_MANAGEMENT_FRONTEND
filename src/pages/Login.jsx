@@ -18,19 +18,18 @@ function Login() {
       email,
       password,
     };
-    await axios
-      .post(`${API}/users/login`, userDetails)
-      .then((res) => {
-        res.data === "Login Success"
-          ? toast.success(res.data, {
-              position: "top-center",
-              autoClose: 1000,
-            }) && navigate("/home")
-          : toast.error(res.data, {
-              position: "top-center",
-              autoClose: 1000,
-            });
-      });
+    await axios.post(`${API}/users/login`, userDetails).then((res) => {
+      res.data.message === "Login Success"
+        ? toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 1000,
+          }) && navigate("/home")
+        : toast.error(res.data.message, {
+            position: "top-center",
+            autoClose: 1000,
+          });
+          localStorage.setItem("x-auth-token",res.data.token)
+    });
   };
   return (
     <div>
@@ -52,8 +51,8 @@ function Login() {
             Sign Up
           </Button>
         </Box>
-        <Box sx={{ marginTop: "20px",marginLeft:"38%" }}>
-          <Box sx={{display:"flex",alignItems:"center",gap:"50px"}}>
+        <Box sx={{ marginTop: "20px", marginLeft: "38%" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "50px" }}>
             <Typography>Email : </Typography>
             <TextField
               id="outlined-basic"
@@ -62,8 +61,15 @@ function Login() {
               name="email"
             />
           </Box>
-          <Box  sx={{display:"flex",alignItems:"center",gap:"20px",marginTop: "20px"}}>
-            <Typography >Password : </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+              marginTop: "20px",
+            }}
+          >
+            <Typography>Password : </Typography>
             <TextField
               id="outlined-basic"
               label="Password"
@@ -71,7 +77,7 @@ function Login() {
               name="password"
             />
           </Box>
-          <Box sx={{ marginTop: "20px",marginLeft:"130px" }}>
+          <Box sx={{ marginTop: "20px", marginLeft: "130px" }}>
             <Button type="submit" variant="contained">
               Submit
             </Button>

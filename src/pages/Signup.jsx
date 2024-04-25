@@ -25,15 +25,17 @@ function Signup() {
     await axios
       .post(`${API}/users/register`, userDetails)
       .then((res) => {
-        res.data === "User Added Successfully"
-          ? toast.success(res.data, {
+        res.data.message === "User Added Successfully"
+          ? toast.success(res.data.message, {
               position: "top-center",
               autoClose: 1000,
             }) && navigate("/home")
-          : toast.error(res.data, {
+          : toast.error(res.data.message, {
               position: "top-center",
               autoClose: 1000,
             });
+            localStorage.setItem("x-auth-token",res.data.token)
+
       });
   };
   return (

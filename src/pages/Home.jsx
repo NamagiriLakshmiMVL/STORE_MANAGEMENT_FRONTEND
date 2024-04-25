@@ -11,6 +11,7 @@ function Home() {
   const navigate = useNavigate();
   const [itemData, setItemData] = useState([]);
   const [search, setSearch] = useState("");
+  const token = localStorage.getItem("x-auth-token")
 
   const cartItems = useSelector((state) => state.itemShop.cartItems);
   const FavItems = useSelector((state) => state.favoriteSlice.favItems);
@@ -21,12 +22,15 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .post(`${API}/items/get-items`, result)
+        .post(`${API}/items/get-items`, result, {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
         .then((res) => setItemData(res.data));
     };
     fetchData();
   }, [cartItems, FavItems, search]);
-  console.log(search);
   return (
     <>
       <Box sx={{ display: "flex" }}>
